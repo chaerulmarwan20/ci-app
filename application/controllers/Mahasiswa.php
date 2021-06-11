@@ -39,7 +39,7 @@ class Mahasiswa extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Mahasiswa_model->tambahDataMahasiswa();
-            $this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert"> Data Mahasiswa <strong>berhasil</strong> ditambahkan. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>');
+            $this->session->set_flashdata('flash', 'ditambahkan.');
             redirect("mahasiswa");
         }
     }
@@ -47,7 +47,7 @@ class Mahasiswa extends CI_Controller
     public function hapus($id)
     {
         $this->Mahasiswa_model->hapusDataMahasiswa($id);
-        $this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert"> Data Mahasiswa <strong>berhasil</strong> dihapus. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>');
+        $this->session->set_flashdata('flash', 'dihapus.');
         redirect("mahasiswa");
     }
 
@@ -77,7 +77,7 @@ class Mahasiswa extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Mahasiswa_model->ubahDataMahasiswa();
-            $this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert"> Data Mahasiswa <strong>berhasil</strong> diubah. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>');
+            $this->session->set_flashdata('flash', 'diubah.');
             redirect("mahasiswa");
         }
     }

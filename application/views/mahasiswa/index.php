@@ -1,9 +1,5 @@
 <div class="container">
-  <div class="row mt-3">
-    <div class="col-md-6">
-      <?=$this->session->flashdata('flash');?>
-    </div>
-  </div>
+  <div class="flash-data" data-flashdata="<?=$this->session->flashdata('flash');?>"></div>
   <div class="row mt-3">
     <div class="col-md-6">
       <a href="<?=base_url();?>mahasiswa/tambah" class="btn btn-primary">Tambah Data Mahasiswa</a>
@@ -31,7 +27,7 @@
         <?php foreach ($mahasiswa as $mhs): ?>
           <li class="list-group-item">
             <?=$mhs['nama'];?>
-            <a href="<?=base_url();?>mahasiswa/hapus/<?=$mhs['id'];?>" class="badge bg-danger float-end" onclick="return confirm('yakin?');">hapus</a>
+            <a href="<?=base_url();?>mahasiswa/hapus/<?=$mhs['id'];?>" class="badge bg-danger float-end tombol-hapus">hapus</a>
             <a href="<?=base_url();?>mahasiswa/ubah/<?=$mhs['id'];?>" class="badge bg-success float-end">ubah</a>
             <a href="<?=base_url();?>mahasiswa/detail/<?=$mhs['id'];?>" class="badge bg-primary float-end">detail</a>
           </li>

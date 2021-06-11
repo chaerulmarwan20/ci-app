@@ -1,1 +1,1 @@
-<h1>Hello, <?=$nama;?>!</h1>
+<h1 class="mt-3">Hello, <?=$nama;?>!</h1>
