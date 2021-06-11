@@ -1,0 +1,10 @@
+.badge {
+	margin-left: 3px;
+	text-decoration: none;
+	transition: 0.5s ease;
+}
+
+.badge:hover {
+	opacity: 0.6;
+	color: #fff;
+}

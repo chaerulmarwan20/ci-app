@@ -16,6 +16,10 @@ class Mahasiswa extends CI_Controller
         $data['judul'] = "Daftar Mahasiswa";
         $data['mahasiswa'] = $this->Mahasiswa_model->getAllMahasiswa();
 
+        if ($this->input->post('keyword')) {
+            $data['mahasiswa'] = $this->Mahasiswa_model->cariDataMahasiswa();
+        }
+
         $this->load->view('templates/header', $data);
         $this->load->view('mahasiswa/index', $data);
         $this->load->view('templates/footer');
@@ -35,7 +39,7 @@ class Mahasiswa extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Mahasiswa_model->tambahDataMahasiswa();
-            $this->session->set_flashdata('flash', 'Ditambahkan');
+            $this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert"> Data Mahasiswa <strong>berhasil</strong> ditambahkan. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>');
             redirect("mahasiswa");
         }
     }
@@ -43,8 +47,39 @@ class Mahasiswa extends CI_Controller
     public function hapus($id)
     {
         $this->Mahasiswa_model->hapusDataMahasiswa($id);
-        $this->session->set_flashdata('flash', 'Dihapus');
+        $this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert"> Data Mahasiswa <strong>berhasil</strong> dihapus. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>');
         redirect("mahasiswa");
+    }
+
+    public function detail($id)
+    {
+        $data['judul'] = "Detail Data Mahasiswa";
+        $data['mahasiswa'] = $this->Mahasiswa_model->getMahasiswaById($id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('mahasiswa/detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function ubah($id)
+    {
+        $data['judul'] = "Ubah Data Mahasiswa";
+        $data['mahasiswa'] = $this->Mahasiswa_model->getMahasiswaById($id);
+        $data['jurusan'] = ["Teknik Informatika", "Sistem Informasi", "Teknik Komputer"];
+
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('nrp', 'NRP', 'trim|required|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('mahasiswa/ubah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Mahasiswa_model->ubahDataMahasiswa();
+            $this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert"> Data Mahasiswa <strong>berhasil</strong> diubah. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </div>');
+            redirect("mahasiswa");
+        }
     }
 }
 
